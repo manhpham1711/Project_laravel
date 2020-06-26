@@ -25,6 +25,9 @@ if (isset($_GET['error'])) {
 if (isset($_GET['cart'])) {
 	echo "<script> alert('" . $_GET['cart'] . "'); </script>";
 }
+if (isset($_GET['pay'])) {
+	echo "<script> alert('" . $_GET['pay'] . "'); </script>";
+}
 ?>
 
 

@@ -67,5 +67,9 @@
 		<h1 style="margin-left: 20%;">Your total money is:  <b><span style="color: red">{{$sumSalary}}</span></b></h1>
 	</div>
 
+	<div>
+		<a href="/website/pay/{{Auth::user()->id}}"><button>Thanh Toán</button></a>
+	</div>
+
 </body>
 </html>

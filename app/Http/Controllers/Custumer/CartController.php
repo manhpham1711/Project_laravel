@@ -42,7 +42,6 @@ class CartController extends Controller {
 		if ($cart->count() == 1) {
 
 			$cartOld = Cart::where('id_product', $id)->first();
-
 			$quantity = $cartOld->quantity + 1;
 			$cartOld->quantity = $quantity;
 			$cartOld->save();

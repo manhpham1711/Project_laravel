@@ -24,6 +24,9 @@ Route::delete('/cart/delete/{id}', 'Custumer\CartController@delete');
 Route::post('/website/cart/add/{id}', 'Custumer\CartController@addCart');
 Route::get('/website/cart/deleteAll', 'Custumer\CartController@deleteAll');
 
+// Thanh toán
+Route::get('/website/pay/{id}', 'Custumer\PayController@buy'); ///////////----------------------
+
 //Đăng nhập đăng xuất
 Route::get('/website/login', 'User\LoginController@index')->name('user.index');
 Route::get('/website/register', 'User\LoginController@register')->name('user.register');
@@ -56,4 +59,8 @@ Route::group(['middleware' => 'App\Http\Middleware\CheckAccess'], function () {
 	Route::get('/admin/account/edit/route/{id}', 'Admin\AdminAccountController@formEditRoute')->name('admin.user.editRoute');
 	Route::post('/admin/account/edit/route/{id}', 'Admin\AdminAccountController@updateRoute');
 
+//Quảng lý thanh toán.
+
 });
+
+Route::get('/admin/seafood/pay', 'Admin\AdminPayController@index');

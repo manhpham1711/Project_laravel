@@ -52,7 +52,7 @@
 												</span> Go To Admin Page
 										</a>
 									@else
-										<h4>Hello :<i><u><b><a href="/website/user" style="color: #1F1F1C;">{{Auth::user()->name}}</a></b></u></i></h4>
+										<h4>Hello :<i><u><b><a href="/website/user" style="color: #1F1F1C;">{{Auth::user()->nameUser}}</a></b></u></i></h4>
 											<a href="/website/logout" data-toggle="modal" style="text-align: center;">
 												<span>
 													<i class="fa fa-bell-o "></i>
