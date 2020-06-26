@@ -88,7 +88,6 @@ class CartController extends Controller {
 
 			return redirect()->route('custumer.cart');
 		}
-
 	}
 
 	function delete($id) {

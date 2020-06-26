@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
 class CheckAccess {
 	/**
@@ -13,15 +12,12 @@ class CheckAccess {
 	 * @param  \Closure  $next
 	 * @return mixed
 	 */
+
 	public function handle($request, Closure $next) {
 
-		if (Auth::user()) {
-			if (!Auth::user()->route == "admin") {
-				//echo '<script> alerl("Bạn Không Có Quyền Truy Cập Này"); </script>';
-				return redirect()->route('index');
-			}
-		} else {
-			return redirect()->route('index');
+		if ($request->user() && $request->user()->route != "admin") {
+			return redirect()->route('index', ["error" => "Bạn Không Có Quyền Truy Cập Vào Trang Này!, Dừng truy cập vào trang này nếu không muốn ăn Cơm Nhà Nước :)"]);
 		}
+		return $next($request);
 	}
 }

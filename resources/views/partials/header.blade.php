@@ -73,7 +73,15 @@
 										<span>
 											<img src="https://img.icons8.com/nolan/64/favorite-cart.png"
 											style=" width: 42px; height: 35px; ">
-										</span> GIỎ HÀNG
+										</span>
+
+										@if($numberProduct != 0)
+
+										<span style="color: red; font-size: 20px;">
+											{{$numberProduct}}
+										</span>
+										@endif
+										GIỎ HÀNG
 									</a>
 
 								</li>
