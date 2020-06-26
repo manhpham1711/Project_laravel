@@ -1,0 +1,21 @@
+.tieude {
+        text-align: center;
+        font-size: 50px;
+        color: #F7F9F8;
+        letter-spacing: .05em;
+        text-shadow: 4px 4px 0px #020202, 7px 7px 0px rgba(0, 0, 0, 0.2);
+        height: 100px;
+        margin-top: -10px;
+        margin-left: 30%;
+    }
+
+.sanpham{
+            display: inline-block;
+            border: 4px solid lightblue;
+            height: auto;
+            width:auto;
+            margin: 20px;
+        }
+
+
+
