@@ -26,6 +26,7 @@ class CartController extends Controller {
 				->join('products', 'carts.id_product', '=', 'products.id')
 				->sum(DB::raw('products.price * carts.quantity'));
 
+			//echo $data;
 			return view('custumer.cart', ['dataCart' => $data, 'sumSalary' => $sumSalary]);
 		} else {
 			return redirect()->route('index', ["error" => "Vui Lòng Đăng Nhập Để Dùng Chức Năng Này!"]);

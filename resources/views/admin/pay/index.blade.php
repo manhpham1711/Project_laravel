@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,88 +6,81 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title></title>
 	<link rel="stylesheet" href="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
-
 <body>
 	@include('admin\index');
-	<div class="container mt-3" style="width: 1097px;">
-		<!-- Nav tabs -->
-		<ul class="nav nav-tabs">
-			<li class="nav-item">
 
-				<a class="nav-link active" data-toggle="tab" href="#menu2">Quản Lý Sản Phẩm</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" data-toggle="tab" href="#menu1">Thêm Sản Phẩm</a>
-			</li>
+	<div id="edit" class="container tab-pane active"><br>
+		<h1 style="text-align: center;"> List Order</h1>
+		<hr>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Name Custumer</th>
+					<th scope="col">Address</th>
+					<th scope="col">Phone</th>
+					<th scope="col">Sale</th>
+					<th scope="col">Total Money</th>
+					<th colspan="2" scope="col" style="text-align: center;">Function</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php $stt = 1;?>
+				@foreach ($data as $d)
+				<tr>
+					<th scope="row"> {{$d->nameUser}} </th>
+					<td> {{$d->address}} </td>
+					<td> {{$d->phone}} </td>
+					<td> <strong>{{$d->code}}</strong> (<samp style="color: #092BFB;">{{$d->percent}}%</samp>)</td>
+					<td> @if ($d->percent == 0)
+						<p>{{$d->sumMoney}}</p>
+						 @else
+						 <p> {{$d->sumMoney * ((100 - $d->percent)/100)}}  </p>
+						 @endif
+					</td>
+					<td>
+						<button type="button" data-toggle="modal" data-target="#myModal{{$stt}}">See details</button>
 
-			<form class="form-inline navbar-form pull-right">
-				<input class="form-control" type="text" placeholder="Search">
-				<button class="btn btn-success-outline" type="submit">Tìm Kiếm</button>
-			</form>
+						<!-- Modal -->
+						<div class="modal fade" id="myModal{{$stt}}" role="dialog">
+							<div class="modal-dialog">
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">Chi tiết đơn hàng</h4>
+									</div>
+									<div class="modal-body">
+										@foreach (json_decode($d->product) as $p)
 
-		</ul>
-		<!-- Tab panes -->
-		<div class="tab-content">
-			<div id="menu2" class="container tab-pane active"><br>
-				<h1 style="text-align: center;"> List Product</h1>
-				<hr>
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th scope="col">Name</th>
-							<th scope="col">Price</th>
-							<th scope="col">Abate</th>
-							<th scope="col">Quantity</th>
-							<th scope="col">Status</th>
-							<th scope="col">Image</th>
-							<th colspan="2" scope="col">Function</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach ($data as $infomation)
-						<tr>
-							<th scope="row"> {{$infomation->name}} </th>
-							<td> {{$infomation->price}} </td>
-							<td> {{$infomation->abate}} </td>
-							<td> {{$infomation->quantity}} </td>
-							<td> {{$infomation->status}} </td>
-							<td> <img src="/storage/{{$infomation->image}}" alt="" height="80px" width="80px"></td>
+										<p>Name product: {{$p->name}}</p>
+										<p>Quantity: {{$p->quantity}}</p>
+										<p>Price: {{$p->price}}</p>
 
-							<td>
-								<form action="/admin/seafood/edit/{{$infomation->id}}" method="GET" accept-charset="utf-8">
-									@csrf
-									<button type="submit"> edit </button>
-								</form>
-							</td>
+										<br><hr>
+										@endforeach
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								</div>
 
-							<td> <form action="/admin/seafood/delete/{{$infomation->id}}" method="POST" accept-charset="utf-8">
-								@csrf
-								@method("DELETE")
-								<button type="submit"> delete</button>
-							</form></td>
-						</tr>
-						@endforeach
+							</div>
+						</div>
+					</td>
+					<td>
+						<form action="" method="GET" accept-charset="utf-8">
+							@csrf
+							<button type="submit">Confirm</button>
+						</form>
+					</td>
 
-					</tbody>
-				</table>
-			</div>
-
-			<div id="menu1" class="container tab-pane fade"><br>
-				@include('admin\seafood\add');
-			</div>
-
-		</div>
+				</tr>
+				<?php $stt++;?>
+				@endforeach
+			</tbody>
+		</table>
 	</div>
-
-
-
-
-
 
 
 

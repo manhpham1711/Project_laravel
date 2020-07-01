@@ -45,13 +45,19 @@
 
 
 	<div class="form-row">
-		<div class="form-group col-sm-6">
+		<div class="form-group col-sm-4">
 			<form action="/admin/seafood" method="get">
 				@csrf
 				<button type="submit" class="btn btn-success">Quản Lý Sản Phẩm</button>
 			</form>
 		</div>
-		<div class="form-group col-sm-6">
+		<div class="form-group col-sm-4">
+			<form action="/admin/seafood/order" method="get">
+				@csrf
+				<button type="submit" class="btn btn-success">Quản Lý Đơn Đặc Hàng</button>
+			</form>
+		</div>
+		<div class="form-group col-sm-4">
 			<form action="/admin/account" method="get" >
 				@csrf
 				<button type="submit" class="btn btn-info">Quản Lý Tài Khoản</button>

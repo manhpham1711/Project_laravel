@@ -13,9 +13,12 @@ class CreateOrderTable extends Migration {
 	public function up() {
 		Schema::create('orders', function (Blueprint $table) {
 			$table->id();
-			$table->integer('quantity');
+			$table->integer('sumMoney');
+			$table->string('phone');
+			$table->string('address');
+			$table->string('product');
+			$table->integer('id_Sale');
 			$table->foreignId('id_user')->references('id')->on('users');
-			$table->foreignId('id_product')->references('id')->on('products');
 			$table->timestamps();
 		});
 	}

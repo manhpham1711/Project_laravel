@@ -11,11 +11,20 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div>
+	<?php
+if (isset($_GET['money'])) {
+	echo '<script> alert("Không đủ tiền, vui lòng nộp tiền vào tài khoảng để giao dịch");</script>';
+}
+?>
 
- <a href="/website/seafood"><h1 style="padding-left: 5%;">back</h1></a><br><hr>
+	<div>
 
-</div>
+		<a href="/website/seafood"><h1 style="padding-left: 5%;">back</h1></a><br><hr>
+
+	</div>
+	<div style="margin-left: 55%">
+		<span style="font-size: 25px; color: #4AF507;">Tiền hiện tại trong tài khoảng của bạn: <span style="color: #F55F0D">{{Auth::user()->money()}} </span></span>
+	</div>
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -40,8 +49,8 @@
 					<td>
 						<p style="margin-left: 10%;">{{$infomation->quantity}}</p>
 						<span>
-						<a href="/cart/{{$infomation->id}}/increase"><button class="btn btn-info"><b>+</b></button></a>
-						<a href="/cart/{{$infomation->id}}/reduction"><button class="btn btn-info"><b>-</b></button></a>
+							<a href="/cart/{{$infomation->id}}/increase"><button class="btn btn-info"><b>+</b></button></a>
+							<a href="/cart/{{$infomation->id}}/reduction"><button class="btn btn-info"><b>-</b></button></a>
 						</span>
 
 					</td>
@@ -64,12 +73,65 @@
 	<div>
 
 		<a href="/website/cart/deleteAll"><button type="button" style="margin-left: 85%;"> Delete All</button></a>
-		<h1 style="margin-left: 20%;">Your total money is:  <b><span style="color: red">{{$sumSalary}}</span></b></h1>
+		<h1 style="margin-left: 20%;">Total money is:  <b><span style="color: red">{{$sumSalary}}</span> đ</b></h1>
+
+		<h1 style="margin-left: 20%;">Percent discount:
+			<b>
+				<span style="color: #08A38F;">
+					<?php
+if (isset($_GET['discount'])) {
+	echo $_GET['discount'] . " %";
+} else {
+	echo "Không có mã giảm giá";
+}
+if (isset($_GET['NO'])) {
+	echo '<script> alert("Mã giảm giá không tồn tại");</script>';
+}
+?>
+
+				</span>
+			</b>
+		</h1>
+		<br>
+		<h1 style="margin-left: 20%;">The amount to be paid is:
+			<b>
+				<span style="color: red">
+					<?php
+if (isset($_GET['discount'])) {
+	echo $sumSalary * ((100 - $_GET['discount']) / 100);
+} else {
+	echo $sumSalary;
+}
+?>
+				</span>
+				đ
+			</b>
+		</h1>
 	</div>
 
-	<div>
-		<a href="/website/pay/{{Auth::user()->id}}"><button>Thanh Toán</button></a>
-	</div>
+	<br><hr>
+	<div><form action="/website/sale" method="POST" accept-charset="utf-8">
+		@csrf
+		Mã Giảm Giá: <input type="text" name="code">&emsp;&emsp;
+		<button type="submit" class="btn btn-success">Áp dụng</button>
+	</form>
+	<br><br>
+	<form method="POST" action="/website/pay/{{Auth::user()->id}}" accept-charset="utf-8">
+		@csrf
+		Address: <input type="text" name="address" placeholder="Nhập Địa chỉ"> &emsp;&emsp;&emsp;&emsp;
+		Phone: <input type="text" name="phone" placeholder="Nhập Số Điện Thoại của bạn ">
+		<?php
+if (isset($_GET['discount'])) {
+	echo '<input hidden type="text" name="id_sale" value="' . $_GET['id'] . '">';
+} else {
+	echo '<input hidden type="text" name="id_sale" value="1">';
+}
+?>
+		<br><br>
+		<button type="submit">Thanh Toán</button>
+	</form>
+
+</div>
 
 </body>
 </html>
