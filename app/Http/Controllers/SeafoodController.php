@@ -20,23 +20,33 @@ class SeafoodController extends Controller {
 	}
 
 	function searchByPriceOrName(Request $request) {
-		$id = Auth::user()->id;
-		$cart = Cart::all()->where('id_user', $id)->count();
+		$cart = 0;
+		if (Auth::user()) {
+			$id = Auth::user()->id;
+			$cart = Cart::all()->where('id_user', $id)->count();
+		}
 		$search = $request->search;
 		$watches = Product::where('name', 'LIKE', '%' . $search . '%')->orWhere('price', 'LIKE', '%' . $search . '%')->get();
 		return view('search', ['product' => $watches, "search" => $search, 'numberProduct' => $cart]);
 	}
 // desc
 	function ascProductOrPrice(Request $request) {
+		$cart = 0;
+		if (Auth::user()) {
+			$id = Auth::user()->id;
+			$cart = Cart::all()->where('id_user', $id)->count();
+		}
 		$seafood = Product::orderBy('price', 'asc')->get();
-		$id = Auth::user()->id;
-		$cart = Cart::all()->where('id_user', $id)->count();
 		return view('index', ["data" => $seafood, 'numberProduct' => $cart]);
 	}
 	function descProductOrPrice(Request $request) {
+
+		$cart = 0;
+		if (Auth::user()) {
+			$id = Auth::user()->id;
+			$cart = Cart::all()->where('id_user', $id)->count();
+		}
 		$seafood = Product::orderBy('price', 'desc')->get();
-		$id = Auth::user()->id;
-		$cart = Cart::all()->where('id_user', $id)->count();
 		return view('index', ["data" => $seafood, 'numberProduct' => $cart]);
 	}
 }

@@ -52,6 +52,7 @@ class PayController extends Controller {
 			$order->id_user = $id;
 			$order->id_Sale = $id_sale;
 			$order->product = json_encode($productPay);
+			$order->shipping = false;
 			$order->save();
 
 			return redirect()->route('index', ["pay" => "Thanh toán thành công. Chờ phê duyệt của Admin sẽ chuyển hàng"]);

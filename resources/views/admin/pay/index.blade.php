@@ -9,7 +9,14 @@
 </head>
 <body>
 
-
+	<?php
+if (isset($_GET['corect'])) {
+	echo '<script> alert("Đơn Hàng Đang Dược Giao"); </script>';
+}
+if (isset($_GET['delete'])) {
+	echo '<script> alert("Đã xóa đơn hàng thành công :( "); </script>';
+}
+?>
 	@include('admin\header');
 
 	<div class="container tab-pane active"><br>
@@ -22,6 +29,7 @@
 					<th scope="col">Address</th>
 					<th scope="col">Phone</th>
 					<th scope="col">Sale</th>
+					<th scope="col">Time</th>
 					<th scope="col">Total Money</th>
 					<th colspan="2" scope="col" style="text-align: center;">Function</th>
 				</tr>
@@ -29,11 +37,13 @@
 			<tbody>
 				<?php $stt = 1;?>
 				@foreach ($data as $d)
+				@if(! $d->shipping)
 				<tr>
 					<th scope="row"> {{$d->nameUser}} </th>
 					<td> {{$d->address}} </td>
 					<td> {{$d->phone}} </td>
 					<td> <strong>{{$d->code}}</strong> (<samp style="color: #092BFB;">{{$d->percent}}%</samp>)</td>
+					<td>{{$d->created_at}}</td>
 					<td> @if ($d->percent == 0)
 						<p>{{$d->sumMoney}}</p>
 						@else
@@ -69,21 +79,21 @@
 						</div>
 					</td>
 					<td>
-						<form action="" method="GET" accept-charset="utf-8">
+						<form action="/admin/seafood/{{$d->id}}/confirm" method="GET" accept-charset="utf-8">
 							@csrf
 							<button type="submit">Confirm</button>
 						</form>
 					</td>
 					<td>
-						<form action="" method="GET" accept-charset="utf-8">
+						<form action="/admin/seafood/{{$d->id}}/delete" method="POST" accept-charset="utf-8">
 							@csrf
+							@method('DELETE')
 							<button type="submit">Delete</button>
 						</form>
 					</td>
-
-
 				</tr>
 				<?php $stt++;?>
+				@endif
 				@endforeach
 			</tbody>
 		</table>

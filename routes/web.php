@@ -30,6 +30,9 @@ Route::get('/website/cart/deleteAll', 'Custumer\CartController@deleteAll');
 // Thanh toán
 Route::post('/website/pay/{id}', 'Custumer\PayController@buy');
 Route::post('/website/sale', 'Custumer\PayController@sale');
+
+//Nộp tiền
+Route::post('/website/payment/{id}', 'Custumer\PaymentController@filed');
 ///////////----------------------
 
 //Đăng nhập đăng xuất
@@ -64,13 +67,14 @@ Route::group(['middleware' => 'App\Http\Middleware\CheckAccess'], function () {
 	Route::get('/admin/account/edit/route/{id}', 'Admin\AdminAccountController@formEditRoute')->name('admin.user.editRoute');
 	Route::post('/admin/account/edit/route/{id}', 'Admin\AdminAccountController@updateRoute');
 
-//Quảng lý thanh toán.
-
 });
+// Quảng lý Đơn Đặc Hàng
+Route::get('/admin/seafood/order', 'Admin\AdminPayController@index')->name('admin.pay.index');
 
-Route::get('/admin/seafood/order', 'Admin\AdminPayController@index');
+Route::get('/admin/seafood/{id}/confirm', 'Admin\AdminPayController@confirm');
+
+Route::delete('/admin/seafood/{id}/delete', 'Admin\AdminPayController@delete');
+
+//Quảng lý Thanh Toán
 Route::get('/admin/seafood/money', 'Admin\AdminMoneyController@index')->name('admin.money');
-Route::get('/admin/seafood/money/confirm/{id}', 'Admin\AdminMoneyController@confirm');
 Route::delete('/admin/seafood/money/delete/{id}', 'Admin\AdminMoneyController@delete');
-
-Route::post('/website/payment/{id}', 'Custumer\PaymentController@filed');

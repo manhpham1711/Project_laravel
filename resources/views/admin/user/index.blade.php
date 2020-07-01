@@ -25,7 +25,7 @@
 			<tbody>
 				@foreach ($dataUser as $infomation)
 				<tr>
-					<th scope="row"> {{$infomation->name}} </th>
+					<th scope="row"> {{$infomation->nameUser}} </th>
 					<td> {{$infomation->username}} </td>
 					@if($infomation->route == 'admin')
 						<td style="color: red"> {{$infomation->route}} </td>
