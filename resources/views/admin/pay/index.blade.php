@@ -8,9 +8,11 @@
 	<link rel="stylesheet" href="">
 </head>
 <body>
-	@include('admin\index');
 
-	<div id="edit" class="container tab-pane active"><br>
+
+	@include('admin\header');
+
+	<div class="container tab-pane active"><br>
 		<h1 style="text-align: center;"> List Order</h1>
 		<hr>
 		<table class="table table-striped">
@@ -34,9 +36,9 @@
 					<td> <strong>{{$d->code}}</strong> (<samp style="color: #092BFB;">{{$d->percent}}%</samp>)</td>
 					<td> @if ($d->percent == 0)
 						<p>{{$d->sumMoney}}</p>
-						 @else
-						 <p> {{$d->sumMoney * ((100 - $d->percent)/100)}}  </p>
-						 @endif
+						@else
+						<p> {{$d->sumMoney * ((100 - $d->percent)/100)}}  </p>
+						@endif
 					</td>
 					<td>
 						<button type="button" data-toggle="modal" data-target="#myModal{{$stt}}">See details</button>
@@ -52,11 +54,9 @@
 									</div>
 									<div class="modal-body">
 										@foreach (json_decode($d->product) as $p)
-
 										<p>Name product: {{$p->name}}</p>
 										<p>Quantity: {{$p->quantity}}</p>
 										<p>Price: {{$p->price}}</p>
-
 										<br><hr>
 										@endforeach
 									</div>
@@ -74,6 +74,13 @@
 							<button type="submit">Confirm</button>
 						</form>
 					</td>
+					<td>
+						<form action="" method="GET" accept-charset="utf-8">
+							@csrf
+							<button type="submit">Delete</button>
+						</form>
+					</td>
+
 
 				</tr>
 				<?php $stt++;?>

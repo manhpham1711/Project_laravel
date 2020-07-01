@@ -57,6 +57,7 @@ class AdminSeafoodController extends Controller {
 		$product->price = $request->price;
 		$product->quantity = $request->quantity;
 
+		$quantity = $request->quantity;
 		$status = "Con Hang";
 		if ($quantity <= 0) {
 			$status = "Het Hang";

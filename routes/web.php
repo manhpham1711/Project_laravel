@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 // giao diện chính
 Route::get('/website/seafood', 'SeafoodController@index')->name('index');
+Route::post('/website/seafood/search', 'SeafoodController@searchByPriceOrName');
+Route::post('/website/seafood/up', 'SeafoodController@ascProductOrPrice');
+Route::post('/website/seafood/down', 'SeafoodController@descProductOrPrice');
 
 //giỏ hàng
 Route::get('/website/cart', 'Custumer\CartController@indexCart')->name('custumer.cart');
@@ -66,3 +69,8 @@ Route::group(['middleware' => 'App\Http\Middleware\CheckAccess'], function () {
 });
 
 Route::get('/admin/seafood/order', 'Admin\AdminPayController@index');
+Route::get('/admin/seafood/money', 'Admin\AdminMoneyController@index')->name('admin.money');
+Route::get('/admin/seafood/money/confirm/{id}', 'Admin\AdminMoneyController@confirm');
+Route::delete('/admin/seafood/money/delete/{id}', 'Admin\AdminMoneyController@delete');
+
+Route::post('/website/payment/{id}', 'Custumer\PaymentController@filed');

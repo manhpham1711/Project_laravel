@@ -41,26 +41,29 @@
 		<h1 style="text-align: center; color: #11F54C"> Hello Admin</h1><br>
 	</div>
 
-
-
-
 	<div class="form-row">
-		<div class="form-group col-sm-4">
+		<div class="form-group col-sm-3">
 			<form action="/admin/seafood" method="get">
 				@csrf
-				<button type="submit" class="btn btn-success">Quản Lý Sản Phẩm</button>
+				<button type="submit" class="btn btn-success">Quản Lý Sản Phẩm <span style="color: #F80D0D; font-size: 25px;"> {{$product}}</span></button>
 			</form>
 		</div>
-		<div class="form-group col-sm-4">
+		<div class="form-group col-sm-3">
 			<form action="/admin/seafood/order" method="get">
 				@csrf
-				<button type="submit" class="btn btn-success">Quản Lý Đơn Đặc Hàng</button>
+				<button type="submit" class="btn btn-info">Quản Lý Đơn Đặc Hàng <span style="color: #F80D0D; font-size: 25px;"> {{$order}}</span></button>
 			</form>
 		</div>
-		<div class="form-group col-sm-4">
+		<div class="form-group col-sm-3">
 			<form action="/admin/account" method="get" >
 				@csrf
-				<button type="submit" class="btn btn-info">Quản Lý Tài Khoản</button>
+				<button type="submit" class="btn btn-success">Quản Lý Tài Khoản <span style="color: #F80D0D; font-size: 25px;"> {{$user}}</span></button>
+			</form>
+		</div>
+		<div class="form-group col-sm-3">
+			<form action="/admin/seafood/money" method="get" >
+				@csrf
+				<button type="submit" class="btn btn-info">Quản Lý Nộp Tiền <span style="color: #F80D0D; font-size: 25px;"> {{$money}}</span></button>
 			</form>
 		</div>
 

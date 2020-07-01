@@ -30,14 +30,28 @@ if (isset($_GET['pay'])) {
 }
 ?>
 
-
-   <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
       @include('partials\header')
-  </nav>
+    </nav>
+    <div style="margin-left: 45%; display: inline-flex;">
+        <form action="/website/seafood/up" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-arrow-up"></span> Up
+            </button>
+        </form>
+        &emsp;&emsp;&emsp;
+        <form action="/website/seafood/down" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-arrow-down"></span> Down
+            </button>
+        </form>
+    </div>
+<br><br>
 
-
-  <!--  -->
-  <div id="display">
+<!--  -->
+<div id="display">
     @foreach ($data as $infomation)
     <div class="container">
         <div id="products" class="row list-group">

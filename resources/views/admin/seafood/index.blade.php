@@ -12,7 +12,7 @@
 </head>
 
 <body>
-	@include('admin\index');
+	@include('admin\header');
 	<div>
 		<div class="container mt-3" style="width: 1097px;">
 			<!-- Nav tabs -->

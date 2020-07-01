@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PayController extends Controller {
+
 	function buy($id, Request $request) {
 
 		$products = DB::table('carts')
@@ -24,6 +25,7 @@ class PayController extends Controller {
 			->where('id_user', $id)
 			->join('products', 'carts.id_product', '=', 'products.id')
 			->sum(DB::raw('products.price * carts.quantity'));
+
 		if (Auth::user()->money < $sumSalary) {
 			return redirect()->route('custumer.cart', ["money"]);
 		} else {

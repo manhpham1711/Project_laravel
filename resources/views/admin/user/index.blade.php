@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="">
 </head>
 <body>
-	@include('admin\index');
+	@include('admin\header');
 	<br><hr>
 
 	<div id="edit" class="container tab-pane active"><br>

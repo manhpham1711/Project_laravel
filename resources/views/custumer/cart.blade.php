@@ -15,6 +15,10 @@
 if (isset($_GET['money'])) {
 	echo '<script> alert("Không đủ tiền, vui lòng nộp tiền vào tài khoảng để giao dịch");</script>';
 }
+if (isset($_GET['payment'])) {
+	echo '<script> alert("Tiền đang được xử lý vui lòng đợi");</script>';
+}
+
 ?>
 
 	<div>
@@ -22,7 +26,37 @@ if (isset($_GET['money'])) {
 		<a href="/website/seafood"><h1 style="padding-left: 5%;">back</h1></a><br><hr>
 
 	</div>
-	<div style="margin-left: 55%">
+	<div style=" margin-left: 55%;">
+		<button type="button" data-toggle="modal" data-target="#money">Nộp Tiền</button>
+		<!-- Modal -->
+		<div class="modal fade" id="money" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<center><h1> Form Nộp Tiền </h1></center>
+					</div>
+					<div class="modal-body">
+						<form action="/website/payment/{{Auth::user()->id}}" method="post" accept-charset="utf-8">
+							@csrf
+							<div class="form-group">
+								<label for="inputMoney">Number Money</label>
+								<input type="number" class="form-control"
+								id="myMoney" name="money">
+							</div>
+							<center>
+								<button type="submit" class="btn btn-info">Nộp Tiền</button>
+							</center>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<br><br>
 		<span style="font-size: 25px; color: #4AF507;">Tiền hiện tại trong tài khoảng của bạn: <span style="color: #F55F0D">{{Auth::user()->money()}} </span></span>
 	</div>
 	<table class="table table-striped">

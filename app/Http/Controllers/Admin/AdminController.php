@@ -2,17 +2,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use App\Order;
+use App\Product;
+use App\Transactions;
+use App\User;
 
 class AdminController extends Controller {
 
 	function index() {
-		if (Auth::user()->route == "admin") {
-			return view('admin.index');
-		} else {
-			echo '<script> alerl("Bạn Không Có Quyền Truy Cập Này"); </script>';
-			return redirect()->route('index');
-		}
+		$order = Order::all()->count();
+		$product = Product::all()->count();
+		$user = User::all()->count();
+		$numberMoney = Transactions::all()->count();
+
+		return view('admin.index', ['order' => $order, 'product' => $product, 'user' => $user, 'money' => $numberMoney]);
 
 	}
 

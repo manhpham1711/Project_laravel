@@ -12,7 +12,6 @@ class AdminPayController extends Controller {
 			->join('sales', 'orders.id_Sale', '=', 'sales.id')
 			->select('orders.id', 'orders.address', 'orders.phone', 'users.nameUser', 'orders.sumMoney', 'orders.product', 'sales.code', 'sales.percent')
 			->get();
-
 		return view('admin.pay.index', ["data" => $data]);
 	}
 }
