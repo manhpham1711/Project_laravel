@@ -66,7 +66,11 @@
   </style>
 </head>
 <body>
-
+<?php
+if (isset($_GET['incorect'])) {
+	echo "<script> alert('Username Or Passsword Incorrect! Please try again :) '); </script>";
+}
+?>
   <form action="/website/login" method="POST">
     @csrf
     <div class="container">

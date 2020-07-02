@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Custumer;
 use App\Http\Controllers\Controller;
 use App\Order;
 use App\Sale;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -26,9 +27,16 @@ class PayController extends Controller {
 			->join('products', 'carts.id_product', '=', 'products.id')
 			->sum(DB::raw('products.price * carts.quantity'));
 
+		// <p> {{$d->sumMoney * ((100 - $d->percent)/100)}}  </p>
+
 		if (Auth::user()->money < $sumSalary) {
 			return redirect()->route('custumer.cart', ["money"]);
 		} else {
+			$discount = $request->discount;
+			$account = User::find($id);
+			$account->money = (Auth::user()->money) - ($sumSalary * ((100 - $discount) / 100));
+			$account->save();
+
 			$productPay = [];
 			foreach ($products as $data) {
 				$item =
@@ -69,8 +77,19 @@ class PayController extends Controller {
 		}
 	}
 
-}
+	function cancelOrder($id) {
+		$order = Order::find($id);
+		$order->delete();
+		$account = User::find(Auth::user()->id);
+		$account->money = (Auth::user()->money) + ($order->sumMoney);
+		$account->save();
+		return redirect()->route('custumer.information', ["cancel"]);
+	}
 
-// INSERT INTO Bang2(Cot1, Cot2, Cot3)
-// SELECT Cot1, Cot2, Cot3
-// FROM Bang1
+	function confirm($id) {
+		$order = Order::find($id);
+		$order->delete();
+		return redirect()->route('custumer.information', ["confirm"]);
+	}
+
+}

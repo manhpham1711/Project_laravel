@@ -36,14 +36,18 @@ Route::post('/website/payment/{id}', 'Custumer\PaymentController@filed');
 ///////////----------------------
 
 //Đăng nhập đăng xuất
-Route::get('/website/login', 'User\LoginController@index')->name('user.index');
+Route::get('/website/login', 'User\LoginController@index')->name('user.login');
 Route::get('/website/register', 'User\LoginController@register')->name('user.register');
 Route::post('/website/login', 'User\LoginController@login');
 Route::get('/website/logout', 'User\LoginController@logout');
 Route::post('/website/register', 'User\LoginController@create');
 
 // người dùng
-Route::get('/website/user', 'Custumer\CustumerController@index')->name('custumer.information');
+Route::get('/website/user', 'Custumer\CustumerController@index')->name('custumer.information'); #***************
+Route::delete('/website/user/{id}/cancelOrder', 'Custumer\PayController@cancelOrder');
+Route::delete('/website/user/{id}/confirm', 'Custumer\PayController@confirm');
+Route::post('/website/user/changePassword', 'Custumer\CustumerController@changePassword');
+////*--------------
 
 Route::group(['middleware' => 'App\Http\Middleware\CheckAccess'], function () {
 
@@ -70,9 +74,7 @@ Route::group(['middleware' => 'App\Http\Middleware\CheckAccess'], function () {
 });
 // Quảng lý Đơn Đặc Hàng
 Route::get('/admin/seafood/order', 'Admin\AdminPayController@index')->name('admin.pay.index');
-
 Route::get('/admin/seafood/{id}/confirm', 'Admin\AdminPayController@confirm');
-
 Route::delete('/admin/seafood/{id}/delete', 'Admin\AdminPayController@delete');
 
 //Quảng lý Thanh Toán

@@ -38,7 +38,8 @@ class LoginController extends Controller {
 				return redirect()->route('index');
 			}
 		} else {
-			echo "<script> alert('Username Or Passsword Incorrect! Please try again :) '); </script>";
+
+			return redirect()->route('user.login', ['incorect']);
 		}
 
 	}

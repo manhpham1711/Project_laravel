@@ -11,7 +11,7 @@ class AdminMoneyController extends Controller {
 		$data = Transactions::all();
 		return view('admin.money.index', ['data' => $data]);
 	}
-
+// Nộp tiền
 	function confirm($id) {
 		$order = Transactions::find($id);
 		$account = User::firstWhere('id', $order->id_user);

@@ -157,8 +157,10 @@ if (isset($_GET['discount'])) {
 		<?php
 if (isset($_GET['discount'])) {
 	echo '<input hidden type="text" name="id_sale" value="' . $_GET['id'] . '">';
+	echo '<input hidden type="text" name="discount" value="' . $_GET['discount'] . '">';
 } else {
 	echo '<input hidden type="text" name="id_sale" value="1">';
+	echo '<input hidden type="text" name="discount" value="0">';
 }
 ?>
 		<br><br>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Order;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AdminPayController extends Controller {
@@ -20,8 +22,10 @@ class AdminPayController extends Controller {
 
 	function delete($id) {
 		$data = Order::find($id);
+		$account = User::find(Auth::user()->id);
+		$account->money = (Auth::user()->money) + ($data->sumMoney);
+		$account->save();
 		$data->delete();
-		echo "<script> alert('Xóa Thành Công'); </script>";
 		return redirect()->route('admin.pay.index', ['delete']);
 	}
 	function confirm($id) {
