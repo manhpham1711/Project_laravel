@@ -75,8 +75,8 @@ class CartController extends Controller {
 		$cart = Cart::find($id);
 		$quantity = $cart->quantity - 1;
 
-		if ($quantity < 0) {
-			$quantity = 0;
+		if ($quantity < 1) {
+			$quantity = 1;
 
 			$cart->quantity = $quantity;
 			$cart->save();

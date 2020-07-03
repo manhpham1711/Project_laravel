@@ -57,10 +57,10 @@ if (isset($_GET['pay'])) {
         <div id="products" class="row list-group">
             <div class="item  col-xs-3 col-lg-3">
                 <div class="thumbnail">
-                    <img class="group list-group-image" src="{{'/storage/'.$infomation->image}}" alt="Card image cap">
+                    <a href="/website/detail/{{$infomation->id}}"><img class="group list-group-image" src="{{'/storage/'.$infomation->image}}" alt="Card image cap"></a>
                     <div class="caption">
                         <h5 class="card-title"> {{ $infomation->name}} </h5>
-                        <h5 class="card-title"> {{ $infomation->price}} </h5>
+                        <h5 class="card-title"> {{ $infomation->getPrice()}} </h5>
 
 
                         <div class="row">
@@ -71,7 +71,7 @@ if (isset($_GET['pay'])) {
                                 </form>
 
                             </div>
-                            <div class="col-xs-12 col-md-6"> <button type="submit"><a href="#" class="btn btn-warning">Chi tiết</a></button>
+                            <div class="col-xs-12 col-md-6"> <button type="submit"><a href="/website/detail/{{$infomation->id}}" class="btn btn-warning">Chi tiết</a></button>
                             </div>
                         </div>
                     </div>

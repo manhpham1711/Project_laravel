@@ -18,6 +18,7 @@ Route::get('/website/seafood', 'SeafoodController@index')->name('index');
 Route::post('/website/seafood/search', 'SeafoodController@searchByPriceOrName');
 Route::post('/website/seafood/up', 'SeafoodController@ascProductOrPrice');
 Route::post('/website/seafood/down', 'SeafoodController@descProductOrPrice');
+Route::get('/website/detail/{id}', 'SeafoodController@detail');
 
 //giỏ hàng
 Route::get('/website/cart', 'Custumer\CartController@indexCart')->name('custumer.cart');
@@ -47,7 +48,8 @@ Route::get('/website/user', 'Custumer\CustumerController@index')->name('custumer
 Route::delete('/website/user/{id}/cancelOrder', 'Custumer\PayController@cancelOrder');
 Route::delete('/website/user/{id}/confirm', 'Custumer\PayController@confirm');
 Route::post('/website/user/changePassword', 'Custumer\CustumerController@changePassword');
-////*--------------
+
+////*-----------------------------------------------*
 
 Route::group(['middleware' => 'App\Http\Middleware\CheckAccess'], function () {
 
@@ -71,12 +73,14 @@ Route::group(['middleware' => 'App\Http\Middleware\CheckAccess'], function () {
 	Route::get('/admin/account/edit/route/{id}', 'Admin\AdminAccountController@formEditRoute')->name('admin.user.editRoute');
 	Route::post('/admin/account/edit/route/{id}', 'Admin\AdminAccountController@updateRoute');
 
-});
 // Quảng lý Đơn Đặc Hàng
-Route::get('/admin/seafood/order', 'Admin\AdminPayController@index')->name('admin.pay.index');
-Route::get('/admin/seafood/{id}/confirm', 'Admin\AdminPayController@confirm');
-Route::delete('/admin/seafood/{id}/delete', 'Admin\AdminPayController@delete');
+	Route::get('/admin/seafood/order', 'Admin\AdminPayController@index')->name('admin.pay.index');
+	Route::get('/admin/seafood/{id}/confirm', 'Admin\AdminPayController@confirm');
+	Route::delete('/admin/seafood/{id}/delete', 'Admin\AdminPayController@delete');
 
 //Quảng lý Thanh Toán
-Route::get('/admin/seafood/money', 'Admin\AdminMoneyController@index')->name('admin.money');
-Route::delete('/admin/seafood/money/delete/{id}', 'Admin\AdminMoneyController@delete');
+	Route::get('/admin/seafood/money', 'Admin\AdminMoneyController@index')->name('admin.money');
+	Route::get('/admin/seafood/money/confirm/{id}', 'Admin\AdminMoneyController@confirm');
+	Route::delete('/admin/seafood/money/delete/{id}', 'Admin\AdminMoneyController@delete');
+
+});

@@ -23,7 +23,7 @@ class LoginController extends Controller {
 		$route = 'custumer';
 		$pass = Hash::make($password);
 		DB::table('users')->insert(["nameUser" => $name, "username" => $username, "password" => $pass, "route" => $route]);
-		return redirect()->route('user.index');
+		return redirect()->route('user.login');
 	}
 
 	function login(Request $request) {

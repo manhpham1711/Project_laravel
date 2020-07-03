@@ -16,20 +16,11 @@ class CustumerController extends Controller {
 	}
 
 	function changePassword(Request $request) {
-		$oldPassword = Hash::make($request->oldPassword);
 		$newPassword = Hash::make($request->newPassword);
-
-		if (Hash::check('secret', $hashedPassword)) {
-
-		}
-		if (Auth::attempt(["username" => Auth::user()->username, "password" => $oldPassword])) {
-			$account = User::find(Auth::user()->id);
-			$account->password = $newPassword;
-			$account->save();
-			return redirect()->route('custumer.information', ['corect']);
-		} else {
-			return redirect()->route('custumer.information', ['incorect']);
-		}
+		$account = User::find(Auth::user()->id);
+		$account->password = $newPassword;
+		$account->save();
+		return redirect()->route('custumer.information', ['corect']);
 
 	}
 

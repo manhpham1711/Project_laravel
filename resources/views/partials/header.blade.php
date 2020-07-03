@@ -93,7 +93,7 @@
 
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<div class="solugan col-lg-6 col-md-6 col-sm-6 col-xs-6">
-					<h2 class="tieude">HẢI SẢN BIÊN GIỚI</h2>
+					<a href="/website/seafood"><h2 class="tieude">HẢI SẢN BIÊN GIỚI</h2></a>
 				</div>
 				<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 					<form class="form-inline my-6 my-lg-0" style="margin-left: 70%" action="/website/seafood/search" method="POST">

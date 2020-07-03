@@ -5,11 +5,6 @@
      @csrf
    <div class="form-row">
       <div class="form-group col-sm-6">
-         <label for="password">Old Password</label>
-         <input type="text" class="form-control"
-         id="name" name="oldPassword" placeholder="Mật Khẩu Cũ">
-      </div>
-      <div class="form-group col-sm-6">
          <label for="password">New Password</label>
          <input type="text" class="form-control"
          id="password" name="newPassword" placeholder="Mật Khẩu Mới">

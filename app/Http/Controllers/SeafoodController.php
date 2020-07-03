@@ -49,4 +49,16 @@ class SeafoodController extends Controller {
 		$seafood = Product::orderBy('price', 'desc')->get();
 		return view('index', ["data" => $seafood, 'numberProduct' => $cart]);
 	}
+
+	function detail($id) {
+		$product = Product::find($id);
+		$cart = 0;
+		if (Auth::user()) {
+			$id = Auth::user()->id;
+			$cart = Cart::all()->where('id_user', $id)->count();
+			return view('chitiet', ["infomation" => $product, 'numberProduct' => $cart]);
+		} else {
+			return view('chitiet', ["infomation" => $product, 'numberProduct' => $cart]);
+		}
+	}
 }
